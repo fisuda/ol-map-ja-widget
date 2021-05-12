@@ -1,13 +1,15 @@
-# OpenLayers Map Widget
+# OpenLayers Map ja Widget
 
 [![](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/visualization.svg)](https://www.fiware.org/developers/catalogue/)
-![](https://img.shields.io/github/license/Wirecloud/ol3-map-widget.svg)
+![](https://img.shields.io/github/license/lets-fiware/ol-map-ja-widget.svg)
 
-[![Build Status](https://travis-ci.org/Wirecloud/ol3-map-widget.svg?branch=develop)](https://travis-ci.org/Wirecloud/ol3-map-widget)
-[![Coverage Status](https://coveralls.io/repos/github/Wirecloud/ol3-map-widget/badge.svg?branch=develop)](https://coveralls.io/github/Wirecloud/ol3-map-widget?branch=develop)
 
 Map viewer [WireCloud widget](http://wirecloud.readthedocs.org/en/latest/) uses OpenLayers. It can receive Layers or
 Point of Interest data and display them on the map.
+
+**NOTE:**
+This WireCloud widget is based on [Wirecloud/ol3-map-widget](https://github.com/Wirecloud/ol3-map-widget)
+created by CoNWeT Lab., Universidad Politecnica de Madrid and Future Internet Consulting and Development Solutions S.L..
 
 ## Build
 
@@ -51,8 +53,9 @@ general information about how to use widgets on the
 
 ## Copyright and License
 
-Copyright (c) 2016-2017 CoNWeT Lab., Universidad Politecnica de Madrid
-Copyright (c) 2017-2019 Future Internet Consulting and Development Solutions S.L.
+Copyright (c) 2016-2017 CoNWeT Lab., Universidad Politecnica de Madrid  
+Copyright (c) 2017-2021 Future Internet Consulting and Development Solutions S.L.  
+Copyright (c) 2021 Kazuhito Suda
 
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
