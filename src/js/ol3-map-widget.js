@@ -1236,6 +1236,20 @@
         return heatmap;
     };
 
+    // 'https://raw.githubusercontent.com/openlayers/openlayers/master/examples/data/kml/2012_Earthquakes_Mag5.kml',
+    var addHeatmapKMLLayer = function addHeatmapKMLLayer(layer_info) {
+        return new ol.layer.Heatmap({
+            source: new ol.source.Vector({
+                url: layer_info.unlKML,
+                format: new ol.format.KML({
+                    extractStyles: false
+                })
+            }),
+            blur: 15,
+            radius: 20
+        });
+    };
+
     var addWMTSLayer = function addWMTSLayer(layer_info) {
         const options = {
             source: new ol.source.WMTS({
@@ -1400,6 +1414,7 @@
         "BingMaps": addBingMapsLayer,
         "CartoDB": addCartoDBLayer,
         "Heatmap": addHeatmapLayer,
+        "HeatmapKML": addHeatmapKMLLayer,
         "ImageWMS": addImageWMSLayer,
         "ImageArcGISRest": addImageArcGISRestLayer,
         "ImageMapGuide": addImageMapGuideLayer,
