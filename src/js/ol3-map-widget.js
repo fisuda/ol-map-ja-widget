@@ -790,6 +790,18 @@
         }
     };
 
+    Widget.prototype.removePoI = function removePoI(poi_info) {
+        var feature = this.vector_source.getFeatureById(poi_info.id);
+        if (feature != null) {
+            if (feature == this.selected_feature) {
+                if (this.popover != null) {
+                    this.popover.hide();
+                }
+            }
+            this.vector_source.removeFeature(feature);
+        }
+    }
+
     /**
      * Replace all the PoIs currently displayed on the map with the ones provided as parameters.
      *
