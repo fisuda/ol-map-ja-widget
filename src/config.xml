@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<widget xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="FISUDA" name="ol-map-ja" version="1.2.4b1">
+<widget xmlns="http://wirecloud.conwet.fi.upm.es/ns/macdescription/1" vendor="FISUDA" name="ol-map-ja" version="1.0.0">
     <details>
-        <title>OpenLayers Map</title>
+        <title>OpenLayers Map ja</title>
         <email>wirecloud@letsfiware.jp</email>
         <homepage>https://github.com/lets-fiware/ol-map-ja-widget</homepage>
         <image>images/catalogue.png</image>
@@ -20,12 +20,48 @@
     </requirements>
 
     <preferences>
-        <preference name="initialCenter" type="text" label="Initial Location" description="Decimal coordinates where map will be centered on load (e.g. `52, 5`). Leave this setting empty if you don't want to center the map at init. Remember to change the initial zoom level if you provide an initial location." default="" />
-        <preference name="initialZoom" type="text" label="Initial Zoom Level" description="Initial zoom level. From 1 to 22, where '1' represents the furthest level and '22' the maximum zoom level." default="3" />
-        <preference name="minzoom" label="Min Zoom" type="text" description="" default="4" />
-        <preference name="poiZoom" label="PoI Zoom" type="text" description="Zoom level applied when centering a PoI" default="17" />
-        <preference name="layerswidget" label="Layers Widget" type="text" description="Widget to use for allowing user to switch between layers" default="" />
-        <preference name="useclustering" label="Use Clustering" type="boolean" description="Mark this option to use clustering for displaying map features" default="false" />
+        <preference
+            name="initialCenter"
+            type="text"
+            label="Initial Location"
+            description="Decimal coordinates where map will be centered on load (e.g. `52, 5`). Leave this setting empty if you don't want to center the map at init. Remember to change the initial zoom level if you provide an initial location."
+            default=""
+        />
+        <preference
+            name="initialZoom"
+            type="text"
+            label="Initial Zoom Level"
+            description="Initial zoom level. From 1 to 22, where '1' represents the furthest level and '22' the maximum zoom level."
+            default="3"
+        />
+        <preference
+            name="minzoom"
+            label="Min Zoom"
+            type="text"
+            description=""
+            default="4"
+        />
+        <preference
+            name="poiZoom"
+            label="PoI Zoom"
+            type="text"
+            description="Zoom level applied when centering a PoI"
+            default="17"
+        />
+        <preference
+            name="layerswidget"
+            label="Layers Widget"
+            type="text"
+            description="Widget to use for allowing user to switch between layers"
+            default=""
+        />
+        <preference
+            name="useclustering"
+            label="Use Clustering"
+            type="boolean"
+            description="Mark this option to use clustering for displaying map features"
+            default="false"
+        />
     </preferences>
 
     <wiring>

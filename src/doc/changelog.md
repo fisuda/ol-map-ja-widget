@@ -1,3 +1,11 @@
+## v1.0.0 (2021-05-16)
+
+- ol map ja v1.0.0
+
+NOTE: This WireCloud widget is based on Wirecloud/ol3-map-widget created by
+CoNWeT Lab., Universidad Politecnica de Madrid and Future Internet Consulting
+and Development Solutions S.L..
+
 ## v1.2.3 (2021-03-25)
 
 - Fix some problems rendering the layer/setcenter buttons
