@@ -9,6 +9,7 @@
 - Add heatmap KML layer
 - Add removePoI feature
 - Add feature for building marker with Font Awesome icon
+- Add custom style option with image or text
 
 NOTE: This WireCloud widget is based on Wirecloud/ol3-map-widget created by
 CoNWeT Lab., Universidad Politecnica de Madrid and Future Internet Consulting
