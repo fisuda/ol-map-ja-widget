@@ -540,6 +540,9 @@
                 layers: [new ol.layer.Tile({source: new ol.source.OSM()})],
             }));
         }
+        if (MashupPlatform.prefs.get('scaleline')) {
+            this.map.addControl(new ol.control.ScaleLine());
+        }
 
         // display popup on click
         this.map.on('click', function (event) {

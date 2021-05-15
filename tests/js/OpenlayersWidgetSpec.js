@@ -64,7 +64,8 @@
                     'poiZoom': 10,
                     'layerswidget': '',
                     'maptype': 'OSM',
-                    'overview': '',
+                    'overview': false,
+                    'scaleline': false,
                     'useclustering': false
                 },
                 inputs: ['layerInfo'],

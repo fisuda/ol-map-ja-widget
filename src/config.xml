@@ -74,6 +74,13 @@
             default="false"
         />
         <preference
+            name="scaleline"
+            label="Scaleline"
+            type="boolean"
+            description="Scaleline"
+            default="false"
+        />
+        <preference
             name="useclustering"
             label="Use Clustering"
             type="boolean"
