@@ -14,3 +14,9 @@ body, html, .map {
     justify-content: center;
     align-items: center;
 }
+
+#swipe {
+    position: absolute;
+    bottom: 40px;
+    width 90%;
+}

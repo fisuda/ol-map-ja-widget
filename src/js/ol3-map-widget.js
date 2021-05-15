@@ -526,6 +526,96 @@
             MashupPlatform.prefs.get("useclustering") ? this.cluster_layer : this.vector_layer
         ];
 
+        var other_layer = MashupPlatform.prefs.get('layer_swipe');
+
+        if (other_layer !== 'Off') {
+
+            var swipe_value = MashupPlatform.prefs.get('swipe_value');
+            if (swipe_value < 0 || swipe_value > 101) {
+                swipe_value = 50;
+            }
+
+            other_layer = CORE_LAYERS[other_layer];
+            layers.splice(1, 0, other_layer);
+
+            if (swipe_value <= 100) {
+                var swipe = document.getElementById('swipe');
+                swipe.classList.remove('hidden');
+                swipe.value = swipe_value;
+
+                other_layer.on('prerender', function (event) {
+                    var ctx = event.context;
+                    var width = ctx.canvas.width * (swipe.value / 100);
+
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.rect(width, 0, ctx.canvas.width - width, ctx.canvas.height);
+                    ctx.clip();
+                });
+
+                other_layer.on('postrender', function (event) {
+                    var ctx = event.context;
+                    ctx.restore();
+                });
+
+                swipe.addEventListener('input', () => {
+                    this.map.render();
+                }, false);
+
+            } else {
+                var imagery = other_layer;
+                var container = document.getElementById('map');
+                var radius = 75;
+                document.addEventListener('keydown', (evt) => {
+                    if (evt.which === 38) {
+                        radius = Math.min(radius + 5, 150);
+                        this.map.render();
+                        evt.preventDefault();
+                    } else if (evt.which === 40) {
+                        radius = Math.max(radius - 5, 25);
+                        this.map.render();
+                        evt.preventDefault();
+                    }
+                });
+
+                // get the pixel position with every move
+                var mousePosition = null;
+
+                container.addEventListener('mousemove', (event) => {
+                    mousePosition = this.map.getEventPixel(event);
+                    this.map.render();
+                });
+
+                container.addEventListener('mouseout', () => {
+                    mousePosition = null;
+                    this.map.render();
+                });
+
+                // before rendering the layer, do some clipping
+                imagery.on('precompose', (event) => {
+                    var ctx = event.context;
+                    var pixelRatio = event.frameState.pixelRatio;
+                    ctx.save();
+                    ctx.beginPath();
+                    if (mousePosition) {
+                        // only show a circle around the mouse
+                        ctx.arc(mousePosition[0] * pixelRatio, mousePosition[1] * pixelRatio,
+                            radius * pixelRatio, 0, 2 * Math.PI);
+                        ctx.lineWidth = 5 * pixelRatio;
+                        ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+                        ctx.stroke();
+                    }
+                    ctx.clip();
+                });
+
+                // after rendering the layer, restore the canvas context
+                imagery.on('postcompose', (event) => {
+                    var ctx = event.context;
+                    ctx.restore();
+                });
+            }
+        }
+
         this.map = new ol.Map({
             target: document.getElementById('map'),
             layers: layers,

@@ -66,6 +66,33 @@
             <option label="地理院 色別標高図" value="GSI_RELIEF"/>
             <option label="地理院 活断層図" value="GSI_AFM"/>
         </preference>
+        <preference name="layer_swipe" label="Layer Swipe" description="map for swipe" type="list" default="Off">
+            <option label="Off" value="Off"/>
+            <option label="Open Street Map" value="OSM"/>
+            <option label="CartDB Light" value="CARTODB_LIGHT"/>
+            <option label="地理院 標準地図" value="GSI_STD"/>
+            <option label="地理院 淡色地図" value="GSI_PALE"/>
+            <option label="地理院 English" value="GSI_ENG"/>
+            <option label="地理院 白地図" value="GSI_BLANK"/>
+            <option label="地理院 写真" value="GSI_PHOTO"/>
+            <option label="地理院 色別標高図" value="GSI_RELIEF"/>
+            <option label="地理院 活断層図" value="GSI_AFM"/>
+            <option label="洪水浸水想定区域(想定最大規模)" value="GSI_SHINSUISHIN"/>
+            <option label="洪水浸水想定区域(想定最大規模)_国管理河川" value="GSI_SHINSUISHIN_KUNI"/>
+            <option label="津波浸水想定" value="GSI_TSUNAMI"/>
+            <option label="土砂災害警戒区域(土石流)" value="GSI_DOSEKIRYUKEIKAIKUIKI"/>
+            <option label="土砂災害警戒区域(急傾斜地の崩壊)" value="GSI_KYUKEISHAKEIKAIKUIKI"/>
+            <option label="土砂災害警戒区域(地滑り)" value="GSI_JISUBERIKEIKAIKUIKI"/>
+            <option label="土石流危険渓流" value="GSI_DOSEKIRYUKIKENKEIRYU"/>
+            <option label="急傾斜地崩壊危険箇所" value="GSI_KYUKEISYACHIHOUKAI"/>
+        </preference>
+        <preference
+            name="swipe_value"
+            label="Swipe value"
+            description="Swipe value"
+            type="number"
+            default="50"
+        />
         <preference
             name="overview"
             label="Overview"

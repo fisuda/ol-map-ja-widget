@@ -11,7 +11,8 @@
 
     const HTML_FIXTURE = '<div id="map" class="map"></div>\n' +
         '<div id="button" class="se-btn fade"></div>\n' +
-        '<div id="setcenter-button" class="se-btn"/><div id="setzoom-button" class="se-btn"/><div id="setcenterzoom-button" class="se-btn"/>';
+        '<div id="setcenter-button" class="se-btn"/><div id="setzoom-button" class="se-btn"/><div id="setcenterzoom-button" class="se-btn"/>\n' +
+        '<input id="swipe" class="hidden" type="range" style="width: 99%" value="100">';
 
     const clearDocument = function clearDocument() {
         var elements = document.querySelectorAll('body > *:not(.jasmine_html-reporter)');
@@ -64,6 +65,8 @@
                     'poiZoom': 10,
                     'layerswidget': '',
                     'maptype': 'OSM',
+                    'layer_swipe': 'Off',
+                    'swipe_value': 50,
                     'overview': false,
                     'scaleline': false,
                     'useclustering': false

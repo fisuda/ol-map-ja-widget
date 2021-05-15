@@ -4,6 +4,7 @@
 - Add Japan GSI map feature
 - Add overview map feature
 - Add scale line feature
+- Add swipe feature
 
 NOTE: This WireCloud widget is based on Wirecloud/ol3-map-widget created by
 CoNWeT Lab., Universidad Politecnica de Madrid and Future Internet Consulting
