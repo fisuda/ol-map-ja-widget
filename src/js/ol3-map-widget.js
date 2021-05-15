@@ -1216,6 +1216,26 @@
         return build_layer.call(this, "Tile", options, layer_info);
     };
 
+    var addHeatmapLayer = function addHeatmapLayer(layer_info) {
+        var new_features = [];
+        layer_info.features.forEach(function (feature) {
+            var new_feature = new ol.Feature({
+                geometry: new ol.geom.Point(ol.proj.transform([feature.lng, feature.lat], "EPSG:4326","EPSG:900913"))
+            });
+            new_feature.set('weight', feature.weight / layer_info.max);
+            new_features.push(new_feature);
+        });
+        var source = new ol.source.Vector({
+            features: new_features
+        });
+        var heatmap = new ol.layer.Heatmap({
+            blur: layer_info.blur,
+            radius: layer_info.radius,
+            source: source
+        });
+        return heatmap;
+    };
+
     var addWMTSLayer = function addWMTSLayer(layer_info) {
         const options = {
             source: new ol.source.WMTS({
@@ -1379,6 +1399,7 @@
     const layer_builders = {
         "BingMaps": addBingMapsLayer,
         "CartoDB": addCartoDBLayer,
+        "Heatmap": addHeatmapLayer,
         "ImageWMS": addImageWMSLayer,
         "ImageArcGISRest": addImageArcGISRestLayer,
         "ImageMapGuide": addImageMapGuideLayer,
