@@ -535,6 +535,12 @@
             })
         });
 
+        if (MashupPlatform.prefs.get('overview')) {
+            this.map.addControl(new ol.control.OverviewMap({
+                layers: [new ol.layer.Tile({source: new ol.source.OSM()})],
+            }));
+        }
+
         // display popup on click
         this.map.on('click', function (event) {
             var features = [];

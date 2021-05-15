@@ -67,6 +67,13 @@
             <option label="地理院 活断層図" value="GSI_AFM"/>
         </preference>
         <preference
+            name="overview"
+            label="Overview"
+            type="boolean"
+            description="Overview Map"
+            default="false"
+        />
+        <preference
             name="useclustering"
             label="Use Clustering"
             type="boolean"
