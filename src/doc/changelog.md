@@ -1,6 +1,7 @@
 ## v1.0.0 (2021-05-16)
 
 - ol map ja v1.0.0
+- Add Japan GSI map feature
 
 NOTE: This WireCloud widget is based on Wirecloud/ol3-map-widget created by
 CoNWeT Lab., Universidad Politecnica de Madrid and Future Internet Consulting

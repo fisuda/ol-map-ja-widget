@@ -55,6 +55,17 @@
             description="Widget to use for allowing user to switch between layers"
             default=""
         />
+        <preference name="maptype" label="Map Type" type="list" description="Map Type" default="OSM">
+            <option label="Open Street Map" value="OSM"/>
+            <option label="CartDB Light" value="CARTODB_LIGHT"/>
+            <option label="地理院 標準地図" value="GSI_STD"/>
+            <option label="地理院 淡色地図" value="GSI_PALE"/>
+            <option label="地理院 English" value="GSI_ENG"/>
+            <option label="地理院 白地図" value="GSI_BLANK"/>
+            <option label="地理院 写真" value="GSI_PHOTO"/>
+            <option label="地理院 色別標高図" value="GSI_RELIEF"/>
+            <option label="地理院 活断層図" value="GSI_AFM"/>
+        </preference>
         <preference
             name="useclustering"
             label="Use Clustering"

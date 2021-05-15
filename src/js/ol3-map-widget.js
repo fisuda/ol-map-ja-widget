@@ -28,6 +28,168 @@
     };
 
     var CORE_LAYERS = {
+        // https://maps.gsi.go.jp/development/ichiran.html
+        GSI_STD: new ol.layer.Tile({
+            title: '地理院 標準地図',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 18,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_PALE: new ol.layer.Tile({
+            title: '地理院 淡色地図',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png",
+                minZoomLevel: 5, maxZoomLevel: 18,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_ENG: new ol.layer.Tile({
+            title: '地理院 English',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/english/{z}/{x}/{y}.png",
+                minZoomLevel: 5, maxZoomLevel: 11,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_BLANK: new ol.layer.Tile({
+            title: '地理院 白地図',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/blank/{z}/{x}/{y}.png",
+                minZoomLevel: 5, maxZoomLevel: 14,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_PHOTO: new ol.layer.Tile({
+            title: '地理院 写真',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg",
+                minZoomLevel: 2, maxZoomLevel: 18,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_ORT: new ol.layer.Tile({
+            title: '地理院 写真',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/ort/{z}/{x}/{y}.jpg",
+                minZoomLevel: 15, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_RELIEF: new ol.layer.Tile({
+            title: '地理院 色別標高図',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/relief/{z}/{x}/{y}.png",
+                minZoomLevel: 5, maxZoomLevel: 15,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_AFM: new ol.layer.Tile({
+            title: '地理院 活断層図',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/afm/{z}/{x}/{y}.png",
+                minZoomLevel: 11, maxZoomLevel: 16,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_SHINSUISHIN: new ol.layer.Tile({ // 洪水浸水想定区域(想定最大規模)
+            title: '洪水浸水想定区域',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/01_flood_l2_shinsuishin_data/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_SHINSUISHIN_KUNI: new ol.layer.Tile({ // 洪水浸水想定区域(想定最大規模)_国管理河川
+            title: '洪水浸水想定区域_国管理河川',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/01_flood_l2_shinsuishin_kuni_data/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_TSUNAMI: new ol.layer.Tile({ // 津波浸水想定
+            title: '津波浸水想定',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/04_tsunami_newlegend_data/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_DOSEKIRYUKEIKAIKUIKI: new ol.layer.Tile({ // 土砂災害警戒区域(土石流)
+            title: '土砂災害警戒区域(土石流)',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/05_dosekiryukeikaikuiki/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_KYUKEISHAKEIKAIKUIKI: new ol.layer.Tile({ // 土砂災害警戒区域(急傾斜地の崩壊)
+            title: '土砂災害警戒区域(急傾斜地の崩壊)',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/05_kyukeishakeikaikuiki/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_JISUBERIKEIKAIKUIKI: new ol.layer.Tile({ // 土砂災害警戒区域(地滑り)
+            title: '土砂災害警戒区域(地滑り)',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/05_jisuberikeikaikuiki/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_DOSEKIRYUKIKENKEIRYU: new ol.layer.Tile({ // 土石流危険渓流
+            title: '土石流危険渓流',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/05_dosekiryukikenkeiryu/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_KYUKEISYACHIHOUKAI: new ol.layer.Tile({ // 急傾斜地崩壊危険箇所
+            title: '急傾斜地崩壊危険箇所',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/05_kyukeisyachihoukai/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_JISUBERIKIKENKASYO: new ol.layer.Tile({ // 地すべり危険箇所
+            title: '地すべり危険箇所',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/05_jisuberikikenkasyo/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_NADAREKIKENKASYO: new ol.layer.Tile({ // 雪崩危険箇所
+            title: '雪崩危険箇所',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
         WIKIMEDIA: new ol.layer.Tile({
             source: new ol.source.OSM({
                 url: "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
@@ -309,7 +471,7 @@
         update_ui_buttons({editing: MashupPlatform.mashup.context.get("editing")});
 
         DEFAULT_MARKER = build_basic_style.call(this);
-        this.base_layer = CORE_LAYERS.OSM;
+        this.base_layer = CORE_LAYERS[MashupPlatform.prefs.get('maptype')];
         var initialCenter = MashupPlatform.prefs.get("initialCenter").split(",").map(Number);
         if (initialCenter.length != 2 || !Number.isFinite(initialCenter[0]) || !Number.isFinite(initialCenter[1])) {
             initialCenter = [0, 0];
@@ -359,12 +521,14 @@
             }
         });
 
+        var layers = [
+            this.base_layer,
+            MashupPlatform.prefs.get("useclustering") ? this.cluster_layer : this.vector_layer
+        ];
+
         this.map = new ol.Map({
             target: document.getElementById('map'),
-            layers: [
-                this.base_layer,
-                MashupPlatform.prefs.get("useclustering") ? this.cluster_layer : this.vector_layer
-            ],
+            layers: layers,
             view: new ol.View({
                 center: ol.proj.transform(initialCenter, 'EPSG:4326', 'EPSG:3857'),
                 zoom: parseInt(MashupPlatform.prefs.get('initialZoom'), 10)

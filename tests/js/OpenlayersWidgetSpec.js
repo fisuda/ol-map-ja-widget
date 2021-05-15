@@ -63,6 +63,7 @@
                     'initialZoom': '10',
                     'poiZoom': 10,
                     'layerswidget': '',
+                    'maptype': 'OSM',
                     'useclustering': false
                 },
                 inputs: ['layerInfo'],
