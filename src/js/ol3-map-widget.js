@@ -28,6 +28,168 @@
     };
 
     var CORE_LAYERS = {
+        // https://maps.gsi.go.jp/development/ichiran.html
+        GSI_STD: new ol.layer.Tile({
+            title: '地理院 標準地図',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 18,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_PALE: new ol.layer.Tile({
+            title: '地理院 淡色地図',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png",
+                minZoomLevel: 5, maxZoomLevel: 18,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_ENG: new ol.layer.Tile({
+            title: '地理院 English',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/english/{z}/{x}/{y}.png",
+                minZoomLevel: 5, maxZoomLevel: 11,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_BLANK: new ol.layer.Tile({
+            title: '地理院 白地図',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/blank/{z}/{x}/{y}.png",
+                minZoomLevel: 5, maxZoomLevel: 14,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_PHOTO: new ol.layer.Tile({
+            title: '地理院 写真',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/seamlessphoto/{z}/{x}/{y}.jpg",
+                minZoomLevel: 2, maxZoomLevel: 18,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_ORT: new ol.layer.Tile({
+            title: '地理院 写真',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/ort/{z}/{x}/{y}.jpg",
+                minZoomLevel: 15, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_RELIEF: new ol.layer.Tile({
+            title: '地理院 色別標高図',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/relief/{z}/{x}/{y}.png",
+                minZoomLevel: 5, maxZoomLevel: 15,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_AFM: new ol.layer.Tile({
+            title: '地理院 活断層図',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank">地理院タイル</a>',
+                url: "https://cyberjapandata.gsi.go.jp/xyz/afm/{z}/{x}/{y}.png",
+                minZoomLevel: 11, maxZoomLevel: 16,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_SHINSUISHIN: new ol.layer.Tile({ // 洪水浸水想定区域(想定最大規模)
+            title: '洪水浸水想定区域',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/01_flood_l2_shinsuishin_data/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_SHINSUISHIN_KUNI: new ol.layer.Tile({ // 洪水浸水想定区域(想定最大規模)_国管理河川
+            title: '洪水浸水想定区域_国管理河川',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/01_flood_l2_shinsuishin_kuni_data/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_TSUNAMI: new ol.layer.Tile({ // 津波浸水想定
+            title: '津波浸水想定',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/04_tsunami_newlegend_data/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_DOSEKIRYUKEIKAIKUIKI: new ol.layer.Tile({ // 土砂災害警戒区域(土石流)
+            title: '土砂災害警戒区域(土石流)',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/05_dosekiryukeikaikuiki/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_KYUKEISHAKEIKAIKUIKI: new ol.layer.Tile({ // 土砂災害警戒区域(急傾斜地の崩壊)
+            title: '土砂災害警戒区域(急傾斜地の崩壊)',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/05_kyukeishakeikaikuiki/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_JISUBERIKEIKAIKUIKI: new ol.layer.Tile({ // 土砂災害警戒区域(地滑り)
+            title: '土砂災害警戒区域(地滑り)',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/05_jisuberikeikaikuiki/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_DOSEKIRYUKIKENKEIRYU: new ol.layer.Tile({ // 土石流危険渓流
+            title: '土石流危険渓流',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/05_dosekiryukikenkeiryu/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_KYUKEISYACHIHOUKAI: new ol.layer.Tile({ // 急傾斜地崩壊危険箇所
+            title: '急傾斜地崩壊危険箇所',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/05_kyukeisyachihoukai/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_JISUBERIKIKENKASYO: new ol.layer.Tile({ // 地すべり危険箇所
+            title: '地すべり危険箇所',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                url: "https://disaportaldata.gsi.go.jp/raster/05_jisuberikikenkasyo/{z}/{x}/{y}.png",
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
+        GSI_NADAREKIKENKASYO: new ol.layer.Tile({ // 雪崩危険箇所
+            title: '雪崩危険箇所',
+            source: new ol.source.XYZ({
+                attributions: '<a href="https://disaportal.gsi.go.jp/hazardmap/copyright/opendata.html" target="_blank">ハザードマップ</a>',
+                minZoomLevel: 2, maxZoomLevel: 17,
+                projection: "EPSG:3857"
+            })
+        }),
         WIKIMEDIA: new ol.layer.Tile({
             source: new ol.source.OSM({
                 url: "https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png"
@@ -148,7 +310,16 @@
             })
         });
 
+        if (options.style.text != null) {
+            style.setText(options.style.text(ol, options.style));
+        }
+
         return (feature, resolution) => {
+            var data = feature.get('data');
+            if (data.style != null && data.style.context != null) {
+                data.style.context(ol, style, feature, resolution);
+            }
+
             if (this.selected_feature === feature) {
                 return style;
             }
@@ -207,6 +378,24 @@
                 src: icon.src,
                 scale: icon.scale
             }));
+        } else if (icon.fontawesome != null) {
+            if (typeof icon.fontawesome === 'string') {
+                icon.fontawesome = {'glyph': icon.fontawesome};
+            }
+            const canvas = build_font_awesome_icon.call(this, icon.fontawesome);
+            if (canvas == null) {
+                return DEFAULT_MARKER;
+            }
+            var image = new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+                anchor: icon.anchor,
+                anchorXUnits: icon.anchorXUnits,
+                anchorYUnits: icon.anchorYUnits,
+                opacity: icon.opacity,
+                img: canvas,
+                imgSize: [canvas.width, canvas.height]
+            }));
+        } else if (vector_style != null && vector_style.image != null) {
+            var image = vector_style.image(ol, vector_style, this.map.getView().getResolution());
         }
         let marker_style = build_basic_style.call(this, {
             image: image,
@@ -219,6 +408,115 @@
 
         return marker_style;
     };
+
+    // Create a table mapping class name to unicode.
+    const create_fa_glyph_table = function reate_fa_glyph_table() {
+        let found = false;
+        const styleSheets = this.get_styleSheets();
+        for (let i = 0; i < styleSheets.length; i++) {
+            const sheet = styleSheets[i];
+            if (sheet && !found) {
+                const before = '::before';
+                for (let j = 0; j < sheet.cssRules.length; j++) {
+                    const cssRule = sheet.cssRules[j];
+                    if (cssRule.selectorText && cssRule.selectorText.startsWith('.fa') && cssRule.selectorText.endsWith(before)) {
+                        const ctx = String.fromCodePoint(cssRule.style.content.replace(/'|"/g, '').charCodeAt(0));
+                        this.fa_glyph_table[cssRule.selectorText.slice(1).slice(0, -1 * before.length)] = ctx;
+                        found = true;
+                    }
+                }
+            }
+        }
+
+        this.fa_marker_cache = {};
+    }
+
+    // Build a marker with Font awsome icon
+    const build_font_awesome_icon = function build_font_awesome_icon(fontSymbol) {
+        if (!Object.keys(this.fa_glyph_table).length) {
+            create_fa_glyph_table.call(this);
+        }
+        const glyph = fontSymbol.glyph || 'fa-star';
+        let form = fontSymbol.form || 'marker';
+        const size = fontSymbol.size || 16;
+        const fill = fontSymbol.fill || 'blue';
+        const stroke = fontSymbol.stroke || 'white';
+        let color = fontSymbol.color || stroke;
+        const strokeWidth = fontSymbol.strokeWidth || 3;
+        const margin = fontSymbol.margin || 0.4;
+        const radius = fontSymbol.radius || (size / 2) + strokeWidth + size * margin;
+        const unicode = this.fa_glyph_table[glyph];
+        if (typeof unicode === 'undefined') {
+            return null;
+        }
+
+        const hash = glyph + form + size + fill + stroke + color + strokeWidth + radius + unicode;
+        if (hash in this.fa_marker_cache) {
+            return this.fa_marker_cache[hash];
+        }
+
+        const canvas = window.top.document.createElement('canvas');
+        canvas.width  = radius * 2;
+        canvas.height = radius * 2;
+
+        const context = canvas.getContext('2d');
+
+        switch (form) {
+        case 'icon':
+            const size2 = size + strokeWidth * 2;
+            context.font = `600 ${size2}px "Font Awesome 5 Free"`;
+            context.textAlign = 'center';
+            context.textBaseline = 'middle';
+            context.fillStyle = stroke;
+            context.fillText(unicode, radius, radius);
+            if (stroke == color) {
+                color = fill;
+            }
+            break;
+        case 'circle':
+            context.arc(radius, radius , radius - strokeWidth - 0.5, 0, 360, false);
+            context.fillStyle = fill;
+            context.fill();
+            context.strokeStyle = stroke;
+            context.lineWidth = strokeWidth;
+            context.stroke();
+            break;
+        case 'box':
+            const s = strokeWidth + 0.5
+            context.beginPath();
+            context.moveTo(s, s);
+            context.lineTo(radius * 2 - s, s);
+            context.lineTo(radius * 2 - s, radius * 2 - s);
+            context.lineTo(s, radius * 2 - s);
+            context.closePath();
+            context.fillStyle = fill;
+            context.fill();
+            context.strokeStyle = stroke;
+            context.lineWidth = strokeWidth;
+            context.stroke();
+            break;
+        default: // marker
+            canvas.height = canvas.height * 1.2;
+            context.beginPath();
+            context.arc(radius, radius, radius - strokeWidth - 0.5,  0.2 * Math.PI,  0.8 * Math.PI, true);
+            context.lineTo(radius, canvas.height - 0.5);
+            context.closePath();
+            context.fillStyle = fill;
+            context.fill();
+            context.strokeStyle = stroke;
+            context.lineWidth = strokeWidth;
+            context.stroke();
+        }
+
+        context.font = `600 ${size}px "Font Awesome 5 Free"`;
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        context.fillStyle = color;
+        context.fillText(unicode, radius, radius);
+
+        this.fa_marker_cache[hash] = canvas;
+        return this.fa_marker_cache[hash];
+    }
 
     var send_visible_pois = function send_visible_pois() {
 
@@ -309,7 +607,7 @@
         update_ui_buttons({editing: MashupPlatform.mashup.context.get("editing")});
 
         DEFAULT_MARKER = build_basic_style.call(this);
-        this.base_layer = CORE_LAYERS.OSM;
+        this.base_layer = CORE_LAYERS[MashupPlatform.prefs.get('maptype')];
         var initialCenter = MashupPlatform.prefs.get("initialCenter").split(",").map(Number);
         if (initialCenter.length != 2 || !Number.isFinite(initialCenter[0]) || !Number.isFinite(initialCenter[1])) {
             initialCenter = [0, 0];
@@ -359,17 +657,118 @@
             }
         });
 
+        var layers = [
+            this.base_layer,
+            MashupPlatform.prefs.get("useclustering") ? this.cluster_layer : this.vector_layer
+        ];
+
+        var other_layer = MashupPlatform.prefs.get('layer_swipe');
+
+        if (other_layer !== 'Off') {
+
+            var swipe_value = MashupPlatform.prefs.get('swipe_value');
+            if (swipe_value < 0 || swipe_value > 101) {
+                swipe_value = 50;
+            }
+
+            other_layer = CORE_LAYERS[other_layer];
+            layers.splice(1, 0, other_layer);
+
+            if (swipe_value <= 100) {
+                var swipe = document.getElementById('swipe');
+                swipe.classList.remove('hidden');
+                swipe.value = swipe_value;
+
+                other_layer.on('prerender', function (event) {
+                    var ctx = event.context;
+                    var width = ctx.canvas.width * (swipe.value / 100);
+
+                    ctx.save();
+                    ctx.beginPath();
+                    ctx.rect(width, 0, ctx.canvas.width - width, ctx.canvas.height);
+                    ctx.clip();
+                });
+
+                other_layer.on('postrender', function (event) {
+                    var ctx = event.context;
+                    ctx.restore();
+                });
+
+                swipe.addEventListener('input', () => {
+                    this.map.render();
+                }, false);
+
+            } else {
+                var imagery = other_layer;
+                var container = document.getElementById('map');
+                var radius = 75;
+                document.addEventListener('keydown', (evt) => {
+                    if (evt.which === 38) {
+                        radius = Math.min(radius + 5, 150);
+                        this.map.render();
+                        evt.preventDefault();
+                    } else if (evt.which === 40) {
+                        radius = Math.max(radius - 5, 25);
+                        this.map.render();
+                        evt.preventDefault();
+                    }
+                });
+
+                // get the pixel position with every move
+                var mousePosition = null;
+
+                container.addEventListener('mousemove', (event) => {
+                    mousePosition = this.map.getEventPixel(event);
+                    this.map.render();
+                });
+
+                container.addEventListener('mouseout', () => {
+                    mousePosition = null;
+                    this.map.render();
+                });
+
+                // before rendering the layer, do some clipping
+                imagery.on('precompose', (event) => {
+                    var ctx = event.context;
+                    var pixelRatio = event.frameState.pixelRatio;
+                    ctx.save();
+                    ctx.beginPath();
+                    if (mousePosition) {
+                        // only show a circle around the mouse
+                        ctx.arc(mousePosition[0] * pixelRatio, mousePosition[1] * pixelRatio,
+                            radius * pixelRatio, 0, 2 * Math.PI);
+                        ctx.lineWidth = 5 * pixelRatio;
+                        ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+                        ctx.stroke();
+                    }
+                    ctx.clip();
+                });
+
+                // after rendering the layer, restore the canvas context
+                imagery.on('postcompose', (event) => {
+                    var ctx = event.context;
+                    ctx.restore();
+                });
+            }
+        }
+
         this.map = new ol.Map({
             target: document.getElementById('map'),
-            layers: [
-                this.base_layer,
-                MashupPlatform.prefs.get("useclustering") ? this.cluster_layer : this.vector_layer
-            ],
+            layers: layers,
             view: new ol.View({
                 center: ol.proj.transform(initialCenter, 'EPSG:4326', 'EPSG:3857'),
                 zoom: parseInt(MashupPlatform.prefs.get('initialZoom'), 10)
             })
         });
+
+        if (MashupPlatform.prefs.get('overview')) {
+            this.map.addControl(new ol.control.OverviewMap({
+                layers: [new ol.layer.Tile({source: new ol.source.OSM()})],
+            }));
+        }
+        if (MashupPlatform.prefs.get('scaleline')) {
+            this.map.addControl(new ol.control.ScaleLine());
+        }
 
         // display popup on click
         this.map.on('click', function (event) {
@@ -459,6 +858,11 @@
         this.map.on('moveend', this.send_visible_pois_bound);
 
         this.geojsonparser = new ol.format.GeoJSON();
+
+        this.fa_glyph_table = {};
+        this.get_styleSheets = function get_styleSheets() {
+            return window.top.document.styleSheets;
+        }
     };
 
     Widget.prototype.registerPoI = function registerPoI(poi_info) {
@@ -526,6 +930,18 @@
             MashupPlatform.widget.outputs.poiOutput.pushEvent(iconFeature.get('data'));
         }
     };
+
+    Widget.prototype.removePoI = function removePoI(poi_info) {
+        var feature = this.vector_source.getFeatureById(poi_info.id);
+        if (feature != null) {
+            if (feature == this.selected_feature) {
+                if (this.popover != null) {
+                    this.popover.hide();
+                }
+            }
+            this.vector_source.removeFeature(feature);
+        }
+    }
 
     /**
      * Replace all the PoIs currently displayed on the map with the ones provided as parameters.
@@ -953,6 +1369,40 @@
         return build_layer.call(this, "Tile", options, layer_info);
     };
 
+    var addHeatmapLayer = function addHeatmapLayer(layer_info) {
+        var new_features = [];
+        layer_info.features.forEach(function (feature) {
+            var new_feature = new ol.Feature({
+                geometry: new ol.geom.Point(ol.proj.transform([feature.lng, feature.lat], "EPSG:4326","EPSG:900913"))
+            });
+            new_feature.set('weight', feature.weight / layer_info.max);
+            new_features.push(new_feature);
+        });
+        var source = new ol.source.Vector({
+            features: new_features
+        });
+        var heatmap = new ol.layer.Heatmap({
+            blur: layer_info.blur,
+            radius: layer_info.radius,
+            source: source
+        });
+        return heatmap;
+    };
+
+    // 'https://raw.githubusercontent.com/openlayers/openlayers/master/examples/data/kml/2012_Earthquakes_Mag5.kml',
+    var addHeatmapKMLLayer = function addHeatmapKMLLayer(layer_info) {
+        return new ol.layer.Heatmap({
+            source: new ol.source.Vector({
+                url: layer_info.unlKML,
+                format: new ol.format.KML({
+                    extractStyles: false
+                })
+            }),
+            blur: 15,
+            radius: 20
+        });
+    };
+
     var addWMTSLayer = function addWMTSLayer(layer_info) {
         const options = {
             source: new ol.source.WMTS({
@@ -1116,6 +1566,8 @@
     const layer_builders = {
         "BingMaps": addBingMapsLayer,
         "CartoDB": addCartoDBLayer,
+        "Heatmap": addHeatmapLayer,
+        "HeatmapKML": addHeatmapKMLLayer,
         "ImageWMS": addImageWMSLayer,
         "ImageArcGISRest": addImageArcGISRestLayer,
         "ImageMapGuide": addImageMapGuideLayer,

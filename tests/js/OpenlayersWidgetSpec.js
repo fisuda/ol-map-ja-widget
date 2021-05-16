@@ -11,7 +11,8 @@
 
     const HTML_FIXTURE = '<div id="map" class="map"></div>\n' +
         '<div id="button" class="se-btn fade"></div>\n' +
-        '<div id="setcenter-button" class="se-btn"/><div id="setzoom-button" class="se-btn"/><div id="setcenterzoom-button" class="se-btn"/>';
+        '<div id="setcenter-button" class="se-btn"/><div id="setzoom-button" class="se-btn"/><div id="setcenterzoom-button" class="se-btn"/>\n' +
+        '<input id="swipe" class="hidden" type="range" style="width: 99%" value="100">';
 
     const clearDocument = function clearDocument() {
         var elements = document.querySelectorAll('body > *:not(.jasmine_html-reporter)');
@@ -63,6 +64,11 @@
                     'initialZoom': '10',
                     'poiZoom': 10,
                     'layerswidget': '',
+                    'maptype': 'OSM',
+                    'layer_swipe': 'Off',
+                    'swipe_value': 50,
+                    'overview': false,
+                    'scaleline': false,
                     'useclustering': false
                 },
                 inputs: ['layerInfo'],
@@ -1044,6 +1050,119 @@
 
             });
 
+            describe("handles the custom styles:", () => {
+                it("Add custom style image", () => {
+                    widget.init();
+                    spyOn(widget.vector_source, 'addFeature');
+                    widget.registerPoI(deepFreeze({
+                        id: '1',
+                        data: {},
+                        location: {
+                            type: 'Point',
+                            coordinates: [0, 0]
+                        },
+                        style: {
+                            image: function (ol, style, resolution) {
+                                return new ol.style.Circle({
+                                    fill: new ol.style.Fill({
+                                        color: '#111111'
+                                    }),
+                                    radius: (1000 / resolution) * style.radius,
+                                    stroke: new ol.style.Stroke({
+                                        color: '#222222',
+                                        width: 1
+                                    })
+                                });
+                            },
+                            radius: 10,
+                        },
+                    }));
+                    expect(widget.vector_source.addFeature).toHaveBeenCalledTimes(1);
+                    expect(widget.vector_source.addFeature).toHaveBeenCalledWith(jasmine.any(ol.Feature));
+                    let feature = widget.vector_source.addFeature.calls.argsFor(0)[0];
+                    let fstyle = feature.getStyle()(feature);
+                    expect(fstyle.getImage().getFill().getColor()).toEqual('#111111');
+                    expect(fstyle.getImage().getRadius()).toEqual(65.41332273339661);
+                    expect(fstyle.getImage().getStroke().getColor()).toEqual('#222222');
+                    expect(fstyle.getImage().getStroke().getWidth()).toEqual(1);
+                });
+
+                it("Add custom style text", () => {
+                    widget.init();
+                    spyOn(widget.vector_source, 'addFeature');
+                    widget.registerPoI(deepFreeze({
+                        id: '1',
+                        data: {},
+                        location: {
+                            type: 'Point',
+                            coordinates: [0, 0]
+                        },
+                        style: {
+                            text: function (ol, style) {
+                                return new ol.style.Text({
+                                    font: '12px serif',
+                                    text: style.value.toString(),
+                                    fill: new ol.style.Fill({
+                                        color: '#333333'
+                                    })
+                                })
+                            },
+                            value: 'test',
+                        },
+                    }));
+                    expect(widget.vector_source.addFeature).toHaveBeenCalledTimes(1);
+                    expect(widget.vector_source.addFeature).toHaveBeenCalledWith(jasmine.any(ol.Feature));
+                    let feature = widget.vector_source.addFeature.calls.argsFor(0)[0];
+                    let fstyle = feature.getStyle()(feature);
+                    expect(fstyle.getText().getFont()).toEqual('12px serif');
+                    expect(fstyle.getText().getText()).toEqual('test');
+                    expect(fstyle.getText().getFill().getColor()).toEqual('#333333');
+                });
+
+                it("Add custom style image with maxzoom", () => {
+                    widget.init();
+                    spyOn(widget.vector_source, 'addFeature');
+                    widget.registerPoI(deepFreeze({
+                        id: '1',
+                        data: {},
+                        location: {
+                            type: 'Point',
+                            coordinates: [0, 0]
+                        },
+                        maxzoom: 13,
+                        style: {
+                            image: function (ol, style, resolution) {
+                                return new ol.style.Circle({
+                                    fill: new ol.style.Fill({
+                                        color: '#444444'
+                                    }),
+                                    radius: (1000 / resolution) * style.radius,
+                                    stroke: new ol.style.Stroke({
+                                        color: '#555555',
+                                        width: 2
+                                    })
+                                });
+                            },
+                            radius: 10,
+                            context: function (ol, style, feature, resolution) {
+                                style.getImage().setRadius(20);
+                            },
+                        },
+                    }));
+
+                    expect(widget.vector_source.addFeature).toHaveBeenCalledTimes(1);
+                    expect(widget.vector_source.addFeature).toHaveBeenCalledWith(jasmine.any(ol.Feature));
+                    let feature = widget.vector_source.addFeature.calls.argsFor(0)[0];
+                    let fstyle = feature.getStyle()(feature);
+                    expect(fstyle.getImage().getFill().getColor()).toEqual('#444444');
+                    expect(fstyle.getImage().getRadius()).toEqual(20);
+                    expect(fstyle.getImage().getStroke().getColor()).toEqual('#555555');
+                    expect(fstyle.getImage().getStroke().getWidth()).toEqual(2);
+
+                });
+
+            });
+
             describe("handles the minzoom option:", () => {
                 const test = function (resolution, displayed) {
                     return () => {
@@ -1965,6 +2084,171 @@
                 expect(widget.base_layer).not.toBe(initial_base_layer);
             });
 
+        });
+
+        describe("build marker with Font Awesome icon", () => {
+            it("build default marker", () => {
+                widget.init();
+                spyOn(widget.vector_source, 'addFeature');
+                spyOn(widget, 'get_styleSheets').and.returnValue([
+                  {cssRules: [{selectorText: '.fa-star::before', style: {content: '\uf005'}}]},
+                  {cssRules: [{selectorText: '', style: {content: ''}}]}
+                ]);
+                widget.registerPoI(deepFreeze({
+                    id: '1',
+                    data: {},
+                    location: {
+                        type: 'Point',
+                        coordinates: [0, 0]
+                    },
+                    icon: {
+                        'fontawesome': ''
+                    }
+                }));
+                expect(widget.vector_source.addFeature).toHaveBeenCalledTimes(1);
+                expect(widget.vector_source.addFeature).toHaveBeenCalledWith(jasmine.any(ol.Feature));
+            });
+            it("build marker with icon form", () => {
+                widget.init();
+                spyOn(widget.vector_source, 'addFeature');
+                spyOn(widget, 'get_styleSheets').and.returnValue([
+                  {cssRules: [{selectorText: '.fa-star::before', style: {content: '\uf005'}}]}
+                ]);
+                widget.registerPoI(deepFreeze({
+                    id: '1',
+                    data: {},
+                    location: {
+                        type: 'Point',
+                        coordinates: [0, 0]
+                    },
+                    icon: {
+                        'fontawesome': {
+                            'glyph': 'fa-star',
+                            'form': 'icon'
+                        }
+                    }
+                }));
+                expect(widget.vector_source.addFeature).toHaveBeenCalledTimes(1);
+                expect(widget.vector_source.addFeature).toHaveBeenCalledWith(jasmine.any(ol.Feature));
+            });
+            it("build red marker with icon form", () => {
+                widget.init();
+                spyOn(widget.vector_source, 'addFeature');
+                spyOn(widget, 'get_styleSheets').and.returnValue([
+                  {cssRules: [{selectorText: '.fa-star::before', style: {content: '\uf005'}}]}
+                ]);
+                widget.registerPoI(deepFreeze({
+                    id: '1',
+                    data: {},
+                    location: {
+                        type: 'Point',
+                        coordinates: [0, 0]
+                    },
+                    icon: {
+                        'fontawesome': {
+                            'glyph': 'fa-star',
+                            'form': 'icon',
+                            'color': 'red'
+                        }
+                    }
+                }));
+                expect(widget.vector_source.addFeature).toHaveBeenCalledTimes(1);
+                expect(widget.vector_source.addFeature).toHaveBeenCalledWith(jasmine.any(ol.Feature));
+            });
+            it("build marker with circle form", () => {
+                widget.init();
+                spyOn(widget.vector_source, 'addFeature');
+                spyOn(widget, 'get_styleSheets').and.returnValue([
+                  {cssRules: [{selectorText: '.fa-star::before', style: {content: '\uf005'}}]}
+                ]);
+                widget.registerPoI(deepFreeze({
+                    id: '1',
+                    data: {},
+                    location: {
+                        type: 'Point',
+                        coordinates: [0, 0]
+                    },
+                    icon: {
+                        'fontawesome': {
+                            'glyph': 'fa-star',
+                            'form': 'circle'
+                        }
+                    }
+                }));
+                expect(widget.vector_source.addFeature).toHaveBeenCalledTimes(1);
+                expect(widget.vector_source.addFeature).toHaveBeenCalledWith(jasmine.any(ol.Feature));
+            });
+            it("build marker with box form", () => {
+                widget.init();
+                spyOn(widget.vector_source, 'addFeature');
+                spyOn(widget, 'get_styleSheets').and.returnValue([
+                  {cssRules: [{selectorText: '.fa-star::before', style: {content: '\uf005'}}]}
+                ]);
+                widget.registerPoI(deepFreeze({
+                    id: '1',
+                    data: {},
+                    location: {
+                        type: 'Point',
+                        coordinates: [0, 0]
+                    },
+                    icon: {
+                        'fontawesome': {
+                            'glyph': 'fa-star',
+                            'form': 'box'
+                        }
+                    }
+                }));
+                expect(widget.vector_source.addFeature).toHaveBeenCalledTimes(1);
+                expect(widget.vector_source.addFeature).toHaveBeenCalledWith(jasmine.any(ol.Feature));
+            });
+            it("should use icon cache", () => {
+                widget.init();
+                spyOn(widget.vector_source, 'addFeature');
+                spyOn(widget, 'get_styleSheets').and.returnValue([
+                  {cssRules: [{selectorText: '.fa-star::before', style: {content: '\uf005'}}]}
+                ]);
+                widget.registerPoI(deepFreeze({
+                    id: '1',
+                    data: {},
+                    location: {
+                        type: 'Point',
+                        coordinates: [0, 0]
+                    },
+                    icon: {
+                        'fontawesome': 'fa-star'
+                    }
+                }));
+                widget.registerPoI(deepFreeze({
+                    id: '2',
+                    data: {},
+                    location: {
+                        type: 'Point',
+                        coordinates: [0, 0]
+                    },
+                    icon: {
+                        'fontawesome': 'fa-star'
+                    }
+                }));
+                expect(widget.vector_source.addFeature).toHaveBeenCalledTimes(2);
+                expect(widget.vector_source.addFeature).toHaveBeenCalledWith(jasmine.any(ol.Feature));
+            });
+            it("fallback when glyph not found", () => {
+                widget.init();
+                spyOn(widget.vector_source, 'addFeature');
+                widget.registerPoI(deepFreeze({
+                    id: '1',
+                    data: {},
+                    location: {
+                        type: 'Point',
+                        coordinates: [0, 0]
+                    },
+                    icon: {
+                        'fontawesome': 'fa-star'
+                    }
+                }));
+                expect(widget.vector_source.addFeature).toHaveBeenCalledTimes(1);
+                expect(widget.vector_source.addFeature).toHaveBeenCalledWith(jasmine.any(ol.Feature));
+            });
         });
 
     });

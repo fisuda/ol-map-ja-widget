@@ -1,3 +1,21 @@
+## v1.0.0 (2021-05-16)
+
+- ol map ja v1.0.0
+- Add Japan GSI map feature
+- Add overview map feature
+- Add scale line feature
+- Add swipe feature
+- Add heatmap layer
+- Add heatmap KML layer
+- Add removePoI feature
+- Add feature for building marker with Font Awesome icon
+- Add custom style option with image or text
+- Add initial location value and initial zoom Level value
+
+NOTE: This WireCloud widget is based on Wirecloud/ol3-map-widget created by
+CoNWeT Lab., Universidad Politecnica de Madrid and Future Internet Consulting
+and Development Solutions S.L..
+
 ## v1.2.3 (2021-03-25)
 
 - Fix some problems rendering the layer/setcenter buttons
