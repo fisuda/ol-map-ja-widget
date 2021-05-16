@@ -1,7 +1,8 @@
-# OpenLayers Map ja Widget
+# OpenLayers Map ja widget
 
 [![](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/visualization.svg)](https://www.fiware.org/developers/catalogue/)
-![](https://img.shields.io/github/license/lets-fiware/ol-map-ja-widget.svg)
+![](https://img.shields.io/github/license/lets-fiware/ol-map-ja-widget.svg)<br/>
+![GitHub all releases](https://img.shields.io/github/downloads/lets-fiware/ol-map-ja-widget/total)
 
 
 Map viewer [WireCloud widget](http://wirecloud.readthedocs.org/en/latest/) uses OpenLayers. It can receive Layers or
@@ -20,7 +21,6 @@ install it on Ubuntu and Debian running the following commands:
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install nodejs
 sudo apt-get install npm
-sudo npm install -g bower
 ```
 
 Install other npm dependencies by running:
@@ -49,6 +49,15 @@ If everything goes well, you will find a wgt file in the `dist` folder.
 Documentation about how to use this widget is available on the [User Guide](src/doc/userguide.md). Anyway, you can find
 general information about how to use widgets on the
 [WireCloud's User Guide](https://wirecloud.readthedocs.io/en/stable/user_guide/) available on Read the Docs.
+
+## Third party libraries
+
+The OpenLayers Map ja widget makes use of the following libraries:
+
+| Libraries                                                         | OSS License                                                             |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| [openlayers/openlayers](https://github.com/openlayers/openlayers) | BSD-2-Clause License                                                    |
+| [proj4js/proj4js](https://github.com/proj4js/proj4js)             | [LICENSE.md](https://github.com/proj4js/proj4js/blob/master/LICENSE.md) |
 
 
 ## Copyright and License

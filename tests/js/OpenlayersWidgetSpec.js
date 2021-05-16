@@ -1,6 +1,7 @@
 /*
  *   Copyright (c) 2017 CoNWeT Lab., Universidad Politecnica de Madrid
  *   Copyright (c) 2017-2021 Future Internet Consulting and Development Solutions S.L.
+ *   Copyright (c) 2021 Kazuhito Suda
  */
 
 /* global MashupPlatform, MockMP, ol, Widget */
