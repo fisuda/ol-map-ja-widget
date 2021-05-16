@@ -10,6 +10,7 @@
 - Add removePoI feature
 - Add feature for building marker with Font Awesome icon
 - Add custom style option with image or text
+- Add initial location value and initial zoom Level value
 
 NOTE: This WireCloud widget is based on Wirecloud/ol3-map-widget created by
 CoNWeT Lab., Universidad Politecnica de Madrid and Future Internet Consulting
