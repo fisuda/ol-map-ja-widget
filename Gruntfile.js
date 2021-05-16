@@ -1,5 +1,6 @@
 /*
- *   Copyright 2014-2016 CoNWeT Lab., Universidad Politecnica de Madrid
+ *   Copyright (c) 2014-2016 CoNWeT Lab., Universidad Politecnica de Madrid
+ *   Copyright (c) 2021 Kauzhito Suda
  *
  *   Licensed under the Apache License, Version 2.0 (the "License");
  *   you may not use this file except in compliance with the License.
