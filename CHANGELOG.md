@@ -1,3 +1,7 @@
+## OpenLayers Map ja v1.0.0-next
+
+- Update copyright (#4)
+
 ## OpenLayers Map ja v1.0.0 - May 16, 2021
 
 Initial release
