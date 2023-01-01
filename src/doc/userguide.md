@@ -142,7 +142,7 @@ This widget can be used standalone in order to display a map. The widget can be 
 
 Copyright (c) 2016-2017 CoNWeT Lab., Universidad Politecnica de Madrid  
 Copyright (c) 2017-2021 Future Internet Consulting and Development Solutions S.L.  
-Copyright (c) 2021-2022 Kazuhito Suda  
+Copyright (c) 2021-2023 Kazuhito Suda  
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
